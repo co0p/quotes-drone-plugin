@@ -1,0 +1,16 @@
+pipeline:
+  build-docker:
+    image: plugins/docker
+    repo: co0p/quotes
+    secrets: [ docker_username, docker_password ]
+  
+  failWhale:
+    image: co0p/quotes
+    failed: true
+    when: 
+      status: [ failure ]
+    
+  successQuote:
+    image: co0p/quotes
+    when: 
+      status: [ success ]
